@@ -1,6 +1,6 @@
 {
   "name": "@tansohq/sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Official TypeScript SDK for the Tanso API",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -40,6 +40,6 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
+    "vitest": "^4.1.1"
   }
 }
