@@ -1,11 +1,11 @@
-# @tanso/sdk
+# @tansohq/sdk
 
-Official TypeScript SDK for the [Tanso](https://tansoflow.com) REST API.
+Official TypeScript SDK for the [Tanso](https://tansohq.com) REST API.
 
 ## Installation
 
 ```bash
-npm install @tanso/sdk
+npm install @tansohq/sdk
 ```
 
 ## Requirements
