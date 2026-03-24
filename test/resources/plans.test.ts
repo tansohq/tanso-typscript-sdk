@@ -25,7 +25,7 @@ describe("PlansResource", () => {
     it("should list plans with default pagination", async () => {
       const data = {
         items: [{
-          plan: { id: "plan_1", key: "basic", name: "Basic", description: "", priceAmount: 29.99, currency: "USD", intervalMonths: 1, billingModel: "FLAT", billingTiming: "ADVANCE" },
+          plan: { id: "plan_1", key: "basic", name: "Basic", description: "", priceAmount: 29.99, currency: "USD", intervalMonths: 1, billingTiming: "ADVANCE" },
           features: [],
         }],
         pagination: { total: 1, limit: 50, offset: 0, hasMore: false },

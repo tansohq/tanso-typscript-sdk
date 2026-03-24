@@ -1,7 +1,10 @@
+import type { SubscriptionDetail } from "./subscriptions.js";
+import type { CreditPool } from "./credits.js";
+
 export interface CreateCustomerParams {
-  externalClientCustomerId: string;
-  firstName: string;
-  lastName: string;
+  customerReferenceId: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   phoneNumber?: string;
   address?: string;
@@ -12,20 +15,15 @@ export interface UpdateCustomerParams {
   lastName?: string;
   email?: string;
   phoneNumber?: string;
-  address?: string;
 }
 
 export interface Customer {
-  id: string;
-  externalClientCustomerId: string;
-  firstName: string;
-  lastName: string;
+  customerReferenceId: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
-  phoneNumber?: string;
-  address?: string;
-  subscriptions?: Record<string, unknown>[];
-  creditPools?: Record<string, unknown>[];
+  subscriptions?: SubscriptionDetail[];
+  creditPools?: CreditPool[];
   createdAt?: string;
   modifiedAt?: string;
-  [key: string]: unknown;
 }

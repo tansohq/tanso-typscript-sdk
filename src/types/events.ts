@@ -1,10 +1,18 @@
+export interface CostInput {
+  model?: string;
+  modelProvider?: string;
+  costUnits?: number;
+}
+
 export interface IngestEventParams {
   customerReferenceId: string;
   eventName: string;
-  usageUnits: number;
   eventIdempotencyKey: string;
+  usageUnits?: number;
   occurredAt?: string;
   costAmount?: number;
+  revenueAmount?: number;
+  costInput?: CostInput;
   flowId?: string;
   meta?: Record<string, unknown>;
   featureKey?: string;

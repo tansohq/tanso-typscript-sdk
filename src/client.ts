@@ -1,9 +1,11 @@
 import { TansoError } from "./errors.js";
 import { HttpClient } from "./http.js";
 import { BillingResource } from "./resources/billing.js";
+import { CreditsResource } from "./resources/credits.js";
 import { CustomersResource } from "./resources/customers.js";
 import { EntitlementsResource } from "./resources/entitlements.js";
 import { EventsResource } from "./resources/events.js";
+import { FeaturesResource } from "./resources/features.js";
 import { PlansResource } from "./resources/plans.js";
 import { SubscriptionsResource } from "./resources/subscriptions.js";
 
@@ -22,6 +24,8 @@ export class TansoClient {
   public readonly entitlements: EntitlementsResource;
   public readonly events: EventsResource;
   public readonly billing: BillingResource;
+  public readonly features: FeaturesResource;
+  public readonly credits: CreditsResource;
 
   constructor(apiKey: string, options?: TansoClientOptions) {
     if (!apiKey) {
@@ -37,6 +41,8 @@ export class TansoClient {
     this.entitlements = new EntitlementsResource(http);
     this.events = new EventsResource(http);
     this.billing = new BillingResource(http);
+    this.features = new FeaturesResource(http);
+    this.credits = new CreditsResource(http);
   }
 
   private detectBaseUrl(apiKey: string): string {

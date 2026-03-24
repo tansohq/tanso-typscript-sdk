@@ -12,33 +12,41 @@ export interface PlanDetail {
   priceAmount: number;
   currency: string;
   intervalMonths: number;
-  billingModel: string;
   billingTiming: string;
   metadata?: Record<string, unknown>;
 }
 
 export interface PlanFeature {
-  featureKey: string;
-  featureName: string;
-  type: string;
-  value?: unknown;
+  id: string;
+  name: string;
+  key: string;
+  description?: string;
+  pricingType: string;
   pricing?: FeaturePricing;
 }
 
 export interface FeaturePricing {
   model: string;
-  unitAmount?: number;
+  pricePerUnit?: number;
+  unitLabel?: string;
+  maxUsage?: number;
+  resetMode?: string;
   tiers?: PriceTier[];
 }
 
 export interface PriceTier {
-  upTo: number | null;
-  unitAmount: number;
-  flatAmount?: number;
+  upTo: number | string | null;
+  pricePerUnit: number;
+  flatFee?: number;
 }
 
 export interface CreditAllocation {
+  id: string;
   creditModelId: string;
   creditModelName: string;
-  amount: number;
+  denomination?: string;
+  creditAmount: number;
+  grantExpiresMonths?: number;
+  hardLimit?: boolean | null;
+  createdAt?: string;
 }

@@ -27,10 +27,16 @@ export class EntitlementsResource {
 
   /**
    * Check a single entitlement for a customer.
+   * @param record - Whether to record the check (default: true)
    */
-  async check(customerId: string, featureKey: string): Promise<EntitlementEvaluation> {
+  async check(
+    customerId: string,
+    featureKey: string,
+    record?: boolean
+  ): Promise<EntitlementEvaluation> {
     return this.http.get<EntitlementEvaluation>(
-      `${BASE_PATH}/${encodeURIComponent(customerId)}/${encodeURIComponent(featureKey)}`
+      `${BASE_PATH}/${encodeURIComponent(customerId)}/${encodeURIComponent(featureKey)}`,
+      record !== undefined ? { record: String(record) } : undefined
     );
   }
 

@@ -129,6 +129,46 @@ describe("EventsResource", () => {
       expect(body.occurredAt).toBe(timestamp);
     });
 
+    it("should include revenueAmount in request body when provided", async () => {
+      const response = { usageLimitExceeded: false };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(response))
+      );
+
+      await client.events.ingest({
+        customerReferenceId: "cust_1",
+        eventName: "api_call",
+        eventIdempotencyKey: "idem_1",
+        revenueAmount: 1.50,
+      });
+
+      const [, options] = mockFetch.mock.calls[0] as [string, RequestInit];
+      const body = JSON.parse(options.body as string);
+      expect(body.revenueAmount).toBe(1.50);
+    });
+
+    it("should include costInput in request body when provided", async () => {
+      const response = { usageLimitExceeded: false };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(response))
+      );
+
+      await client.events.ingest({
+        customerReferenceId: "cust_1",
+        eventName: "llm_call",
+        eventIdempotencyKey: "idem_1",
+        costInput: { model: "gpt-4", modelProvider: "openai", costUnits: 150 },
+      });
+
+      const [, options] = mockFetch.mock.calls[0] as [string, RequestInit];
+      const body = JSON.parse(options.body as string);
+      expect(body.costInput).toEqual({
+        model: "gpt-4",
+        modelProvider: "openai",
+        costUnits: 150,
+      });
+    });
+
     it("should include costAmount in request body when provided", async () => {
       const response = { usageLimitExceeded: false };
       mockFetch.mockResolvedValueOnce(

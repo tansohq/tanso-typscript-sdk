@@ -74,6 +74,8 @@ describe("TansoClient", () => {
     expect(client.entitlements).toBeDefined();
     expect(client.events).toBeDefined();
     expect(client.billing).toBeDefined();
+    expect(client.features).toBeDefined();
+    expect(client.credits).toBeDefined();
   });
 
   it("should throw TansoNetworkError on fetch failure", async () => {

@@ -28,8 +28,7 @@ describe("CustomersResource", () => {
   describe("create", () => {
     it("should create a customer", async () => {
       const customer = {
-        id: "cust_1",
-        externalClientCustomerId: "ext_1",
+        customerReferenceId: "ext_1",
         firstName: "John",
         lastName: "Doe",
         email: "john@example.com",
@@ -39,7 +38,7 @@ describe("CustomersResource", () => {
       );
 
       const result = await client.customers.create({
-        externalClientCustomerId: "ext_1",
+        customerReferenceId: "ext_1",
         firstName: "John",
         lastName: "Doe",
         email: "john@example.com",
@@ -58,7 +57,7 @@ describe("CustomersResource", () => {
         "Content-Type": "application/json",
       });
       expect(JSON.parse(options.body as string)).toEqual({
-        externalClientCustomerId: "ext_1",
+        customerReferenceId: "ext_1",
         firstName: "John",
         lastName: "Doe",
         email: "john@example.com",
@@ -67,10 +66,9 @@ describe("CustomersResource", () => {
   });
 
   describe("get", () => {
-    it("should get a customer by external ID", async () => {
+    it("should get a customer by reference ID", async () => {
       const customer = {
-        id: "cust_1",
-        externalClientCustomerId: "ext_1",
+        customerReferenceId: "ext_1",
         firstName: "John",
         lastName: "Doe",
         email: "john@example.com",
@@ -103,8 +101,7 @@ describe("CustomersResource", () => {
   describe("update", () => {
     it("should update a customer", async () => {
       const updated = {
-        id: "cust_1",
-        externalClientCustomerId: "ext_1",
+        customerReferenceId: "ext_1",
         firstName: "Jane",
         lastName: "Doe",
         email: "jane@example.com",
@@ -153,9 +150,7 @@ describe("CustomersResource", () => {
 
       await expect(
         client.customers.create({
-          externalClientCustomerId: "ext_1",
-          firstName: "John",
-          lastName: "Doe",
+          customerReferenceId: "ext_1",
           email: "john@example.com",
         })
       ).rejects.toThrow(TansoConflictError);

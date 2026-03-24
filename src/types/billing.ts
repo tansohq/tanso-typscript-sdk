@@ -1,3 +1,5 @@
+import type { SubscriptionDetail } from "./subscriptions.js";
+
 export interface Invoice {
   id: string;
   createdAt: string;
@@ -5,7 +7,7 @@ export interface Invoice {
   amount: number;
   dueDate: string;
   currency: string;
-  subscription?: Record<string, unknown>;
+  subscription?: SubscriptionDetail;
   status: string;
   metadata?: Record<string, unknown>;
   items?: InvoiceItem[];
@@ -22,5 +24,4 @@ export interface InvoiceItem {
 
 export interface CheckoutSession {
   url: string;
-  [key: string]: unknown;
 }

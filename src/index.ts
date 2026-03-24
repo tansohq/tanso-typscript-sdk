@@ -53,7 +53,13 @@ export type {
 } from "./types/entitlements.js";
 
 // Types - Events
-export type { IngestEventParams, EventIngestionResponse } from "./types/events.js";
+export type { IngestEventParams, EventIngestionResponse, CostInput } from "./types/events.js";
 
 // Types - Billing
 export type { Invoice, InvoiceItem, CheckoutSession } from "./types/billing.js";
+
+// Types - Features
+export type { Feature } from "./types/features.js";
+
+// Types - Credits
+export type { CreditPool, CreditGrant, CreditTransaction } from "./types/credits.js";

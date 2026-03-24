@@ -1,12 +1,10 @@
 export interface Entitlement {
   featureKey: string;
-  isAllowed: boolean;
-  [key: string]: unknown;
+  allowed: boolean;
 }
 
 export interface SubscriptionEntitlements {
   subscriptionId: string;
-  planId: string;
   entitlements: Entitlement[];
 }
 
@@ -14,7 +12,7 @@ export interface EvaluateEntitlementParams {
   customerReferenceId: string;
   featureKey: string;
   usage?: {
-    usageUnits: number;
+    usageUnits?: number;
     eventName?: string;
     meta?: Record<string, unknown>;
   };
@@ -42,7 +40,7 @@ export interface EntitlementEvaluationCredit {
   balance: number;
   totalGranted: number;
   totalConsumed: number;
-  hardLimit: boolean;
+  hardLimit?: boolean | null;
 }
 
 export interface EntitlementEvaluationMeta {
@@ -54,7 +52,7 @@ export interface EntitlementEvaluationMeta {
 export interface EntitlementEvaluation {
   referenceCustomerId: string;
   featureKey: string;
-  isAllowed: boolean;
+  allowed: boolean;
   flowId: string;
   meta?: EntitlementEvaluationMeta;
   usage?: EntitlementEvaluationUsage;

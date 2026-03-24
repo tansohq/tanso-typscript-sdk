@@ -14,21 +14,21 @@ export class CustomersResource {
   }
 
   /**
-   * Get a customer by external customer ID.
+   * Get a customer by customer reference ID.
    */
-  async get(externalClientCustomerId: string): Promise<Customer> {
-    return this.http.get<Customer>(`${BASE_PATH}/${encodeURIComponent(externalClientCustomerId)}`);
+  async get(customerReferenceId: string): Promise<Customer> {
+    return this.http.get<Customer>(`${BASE_PATH}/${encodeURIComponent(customerReferenceId)}`);
   }
 
   /**
-   * Update a customer by external customer ID.
+   * Update a customer by customer reference ID.
    */
   async update(
-    externalClientCustomerId: string,
+    customerReferenceId: string,
     params: UpdateCustomerParams
   ): Promise<Customer> {
     return this.http.patch<Customer>(
-      `${BASE_PATH}/${encodeURIComponent(externalClientCustomerId)}`,
+      `${BASE_PATH}/${encodeURIComponent(customerReferenceId)}`,
       params
     );
   }

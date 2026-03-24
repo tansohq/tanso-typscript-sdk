@@ -29,8 +29,7 @@ describe("EntitlementsResource", () => {
       const data = {
         items: [{
           subscriptionId: "sub_1",
-          planId: "plan_1",
-          entitlements: [{ featureKey: "feature_1", isAllowed: true }],
+          entitlements: [{ featureKey: "feature_1", allowed: true }],
         }],
         pagination: { total: 1, limit: 50, offset: 0, hasMore: false },
       };
@@ -69,7 +68,7 @@ describe("EntitlementsResource", () => {
       const evaluation = {
         referenceCustomerId: "cust_1",
         featureKey: "api_access",
-        isAllowed: true,
+        allowed: true,
         flowId: "flw_123",
       };
       mockFetch.mockResolvedValueOnce(
@@ -80,11 +79,28 @@ describe("EntitlementsResource", () => {
 
       expect(result).toEqual(evaluation);
       expect(result.referenceCustomerId).toBe("cust_1");
-      expect(result.isAllowed).toBe(true);
+      expect(result.allowed).toBe(true);
       const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
         "https://sandbox.api.tansoflow.com/api/v1/client/entitlements/cust_1/api_access"
       );
+    });
+
+    it("should pass record=false query param when specified", async () => {
+      const evaluation = {
+        referenceCustomerId: "cust_1",
+        featureKey: "api_access",
+        allowed: true,
+        flowId: "flw_123",
+      };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(evaluation))
+      );
+
+      await client.entitlements.check("cust_1", "api_access", false);
+
+      const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
+      expect(url).toContain("record=false");
     });
 
     it("should throw TansoNotFoundError on 404", async () => {
@@ -102,7 +118,7 @@ describe("EntitlementsResource", () => {
     it("should evaluate an entitlement with usage simulation", async () => {
       const evaluation = {
         referenceCustomerId: "cust_1",
-        isAllowed: true,
+        allowed: true,
         featureKey: "api_calls",
         flowId: "flw_456",
       };
