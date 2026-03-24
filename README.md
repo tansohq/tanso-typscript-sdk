@@ -15,7 +15,7 @@ npm install @tansohq/sdk
 ## Quick Start
 
 ```typescript
-import { TansoClient } from "@tanso/sdk";
+import { TansoClient } from "@tansohq/sdk";
 
 const client = new TansoClient("sk_test_your_api_key");
 
