@@ -21,26 +21,27 @@ const client = new TansoClient("sk_test_your_api_key");
 
 // Create a customer
 const customer = await client.customers.create({
-  externalClientCustomerId: "user_123",
+  customerReferenceId: "user_123",
+  email: "jane@example.com",
   firstName: "Jane",
   lastName: "Doe",
-  email: "jane@example.com",
 });
 
 // Create a subscription
 const subscription = await client.subscriptions.create({
-  externalClientCustomerId: "user_123",
+  customerReferenceId: "user_123",
   planId: "plan_pro",
 });
 
 // Check an entitlement
 const entitlement = await client.entitlements.check("user_123", "api_access");
-console.log(entitlement.isAllowed); // true
+console.log(entitlement.allowed); // true
 
 // Ingest a usage event
 await client.events.ingest({
   customerReferenceId: "user_123",
   eventName: "api_call",
+  eventIdempotencyKey: "evt_unique_123",
   usageUnits: 1,
 });
 ```
@@ -67,15 +68,15 @@ const client = new TansoClient("sk_test_key", {
 ### Customers
 
 ```typescript
-client.customers.create({ externalClientCustomerId, firstName, lastName, email, phoneNumber? })
-client.customers.get(externalClientCustomerId)
-client.customers.update(externalClientCustomerId, { firstName?, lastName?, email?, phoneNumber? })
+client.customers.create({ customerReferenceId, email, firstName?, lastName?, phoneNumber?, address? })
+client.customers.get(customerReferenceId)
+client.customers.update(customerReferenceId, { firstName?, lastName?, email?, phoneNumber? })
 ```
 
 ### Subscriptions
 
 ```typescript
-client.subscriptions.create({ externalClientCustomerId, planId })
+client.subscriptions.create({ customerReferenceId, planId, gracePeriod? })
 client.subscriptions.cancel(subscriptionId, cancelMode?)  // "END_OF_PERIOD" | "IMMEDIATE"
 client.subscriptions.revertCancellation(subscriptionId)
 client.subscriptions.changePlan(subscriptionId, { changeToPlanId, changeType })
@@ -88,18 +89,36 @@ client.subscriptions.cancelScheduledChange(subscriptionId)
 client.plans.list(limit?, offset?)
 ```
 
+### Features
+
+```typescript
+client.features.list(limit?, offset?)
+client.features.get(featureKey)
+```
+
 ### Entitlements
 
 ```typescript
 client.entitlements.list(customerId, limit?, offset?)
-client.entitlements.check(customerId, featureKey)
+client.entitlements.check(customerId, featureKey, record?)
 client.entitlements.evaluate({ customerReferenceId, featureKey, usage?, context? })
 ```
 
 ### Events
 
 ```typescript
-client.events.ingest({ customerReferenceId, eventName, usageUnits, properties?, meta?, eventIdempotencyKey? })
+client.events.ingest({
+  customerReferenceId,
+  eventName,
+  eventIdempotencyKey,
+  usageUnits?,
+  costAmount?,
+  revenueAmount?,
+  costInput?,   // { model?, modelProvider?, costUnits? }
+  meta?,
+  flowId?,
+  featureKey?,
+})
 ```
 
 ### Billing
@@ -108,6 +127,15 @@ client.events.ingest({ customerReferenceId, eventName, usageUnits, properties?, 
 client.billing.listInvoices(customerId, limit?, offset?)
 client.billing.markPaid(invoiceId)
 client.billing.createCheckoutSession(invoiceId)
+```
+
+### Credits
+
+```typescript
+client.credits.listPools(customerReferenceId, limit?, offset?)
+client.credits.getPool(customerReferenceId, poolId)
+client.credits.listTransactions(customerReferenceId, poolId, limit?, offset?)
+client.credits.listGrants(customerReferenceId, poolId, limit?, offset?)
 ```
 
 ## Error Handling
