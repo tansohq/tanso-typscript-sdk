@@ -10,12 +10,8 @@ export interface CreditPool {
   totalReversed: number;
   hardLimit?: boolean | null;
   status: string;
-  rolloverPolicy?: string;
-  rolloverCap?: number;
-  customerId?: string;
   metadata?: Record<string, unknown>;
   createdAt?: string;
-  modifiedAt?: string;
 }
 
 export interface CreditGrant {

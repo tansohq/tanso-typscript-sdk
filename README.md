@@ -126,7 +126,7 @@ client.events.ingest({
 ```typescript
 client.billing.listInvoices(customerId, limit?, offset?)
 client.billing.markPaid(invoiceId)
-client.billing.createCheckoutSession(invoiceId)
+client.billing.createCheckoutSession(subscriptionId)
 ```
 
 ### Credits

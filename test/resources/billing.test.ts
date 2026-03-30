@@ -103,12 +103,12 @@ describe("BillingResource", () => {
         mockResponse(200, successEnvelope(session))
       );
 
-      const result = await client.billing.createCheckoutSession("inv_1");
+      const result = await client.billing.createCheckoutSession("sub_1");
 
       expect(result).toEqual(session);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/billing/invoices/inv_1/stripe/checkout"
+        "https://sandbox.api.tansoflow.com/api/v1/client/billing/subscriptions/sub_1/stripe/checkout"
       );
       expect(options.method).toBe("POST");
     });

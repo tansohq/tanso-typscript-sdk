@@ -31,11 +31,11 @@ export class BillingResource {
   }
 
   /**
-   * Create a Stripe checkout session for an invoice.
+   * Create a Stripe checkout session for a subscription.
    */
-  async createCheckoutSession(invoiceId: string): Promise<CheckoutSession> {
+  async createCheckoutSession(subscriptionId: string): Promise<CheckoutSession> {
     return this.http.post<CheckoutSession>(
-      `${BASE_PATH}/${encodeURIComponent(invoiceId)}/stripe/checkout`
+      `/api/v1/client/billing/subscriptions/${encodeURIComponent(subscriptionId)}/stripe/checkout`
     );
   }
 }

@@ -47,6 +47,7 @@ export interface SubscribedCustomerResponse {
   subscription: SubscriptionDetail;
   invoice: Invoice;
   metadata?: Record<string, unknown>;
+  checkoutUrl?: string;
 }
 
 /** @deprecated Use SubscriptionDetail instead */
