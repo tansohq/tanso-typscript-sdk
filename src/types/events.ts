@@ -1,7 +1,10 @@
 export interface CostInput {
   model?: string;
   modelProvider?: string;
+  /** @deprecated Use inputTokens and outputTokens instead. */
   costUnits?: number;
+  inputTokens?: number;
+  outputTokens?: number;
 }
 
 export interface IngestEventParams {

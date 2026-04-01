@@ -169,6 +169,34 @@ describe("EventsResource", () => {
       });
     });
 
+    it("should include inputTokens and outputTokens in costInput when provided", async () => {
+      const response = { usageLimitExceeded: false };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(response))
+      );
+
+      await client.events.ingest({
+        customerReferenceId: "cust_1",
+        eventName: "llm_call",
+        eventIdempotencyKey: "idem_1",
+        costInput: {
+          model: "gpt-4",
+          modelProvider: "openai",
+          inputTokens: 3000,
+          outputTokens: 500,
+        },
+      });
+
+      const [, options] = mockFetch.mock.calls[0] as [string, RequestInit];
+      const body = JSON.parse(options.body as string);
+      expect(body.costInput).toEqual({
+        model: "gpt-4",
+        modelProvider: "openai",
+        inputTokens: 3000,
+        outputTokens: 500,
+      });
+    });
+
     it("should include costAmount in request body when provided", async () => {
       const response = { usageLimitExceeded: false };
       mockFetch.mockResolvedValueOnce(
