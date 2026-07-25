@@ -1,6 +1,6 @@
 {
   "name": "@tansohq/sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Official TypeScript SDK for the Tanso API",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -41,5 +41,9 @@
   "devDependencies": {
     "typescript": "^5.4.0",
     "vitest": "^4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tansohq/tanso-typescript-sdk.git"
   }
 }
