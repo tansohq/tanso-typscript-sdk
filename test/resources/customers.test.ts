@@ -49,7 +49,7 @@ describe("CustomersResource", () => {
 
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/customers"
+        "http://localhost:8080/api/v1/client/customers"
       );
       expect(options.method).toBe("POST");
       expect(options.headers).toMatchObject({
@@ -82,7 +82,7 @@ describe("CustomersResource", () => {
       expect(result).toEqual(customer);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/customers/ext_1"
+        "http://localhost:8080/api/v1/client/customers/ext_1"
       );
       expect(options.method).toBe("GET");
     });
@@ -118,7 +118,7 @@ describe("CustomersResource", () => {
       expect(result).toEqual(updated);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/customers/ext_1"
+        "http://localhost:8080/api/v1/client/customers/ext_1"
       );
       expect(options.method).toBe("PATCH");
       expect(JSON.parse(options.body as string)).toEqual({

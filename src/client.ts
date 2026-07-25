@@ -9,8 +9,8 @@ import { FeaturesResource } from "./resources/features.js";
 import { PlansResource } from "./resources/plans.js";
 import { SubscriptionsResource } from "./resources/subscriptions.js";
 
-const SANDBOX_BASE_URL = "https://sandbox.api.tansoflow.com";
-const LIVE_BASE_URL = "https://api.tansoflow.com";
+/** Tanso is self-hosted; this default matches the quickstart compose stack. */
+const DEFAULT_BASE_URL = "http://localhost:8080";
 
 export interface TansoClientOptions {
   /** Override the base URL for the API. */
@@ -32,7 +32,7 @@ export class TansoClient {
       throw new TansoError("API key is required");
     }
 
-    const baseUrl = options?.baseUrl ?? this.detectBaseUrl(apiKey);
+    const baseUrl = options?.baseUrl ?? DEFAULT_BASE_URL;
     const http = new HttpClient({ apiKey, baseUrl });
 
     this.customers = new CustomersResource(http);
@@ -43,15 +43,5 @@ export class TansoClient {
     this.billing = new BillingResource(http);
     this.features = new FeaturesResource(http);
     this.credits = new CreditsResource(http);
-  }
-
-  private detectBaseUrl(apiKey: string): string {
-    if (apiKey.startsWith("sk_test_")) {
-      return SANDBOX_BASE_URL;
-    }
-    if (apiKey.startsWith("sk_live_")) {
-      return LIVE_BASE_URL;
-    }
-    return LIVE_BASE_URL;
   }
 }

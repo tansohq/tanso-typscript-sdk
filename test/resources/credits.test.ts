@@ -49,7 +49,7 @@ describe("CreditsResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/credits/cust_1/pools"
+        "http://localhost:8080/api/v1/client/credits/cust_1/pools"
       );
       expect(options.method).toBe("GET");
     });
@@ -93,7 +93,7 @@ describe("CreditsResource", () => {
       expect(result).toEqual(pool);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/credits/cust_1/pools/pool_1"
+        "http://localhost:8080/api/v1/client/credits/cust_1/pools/pool_1"
       );
       expect(options.method).toBe("GET");
     });
@@ -131,7 +131,7 @@ describe("CreditsResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/credits/cust_1/pools/pool_1/transactions"
+        "http://localhost:8080/api/v1/client/credits/cust_1/pools/pool_1/transactions"
       );
       expect(options.method).toBe("GET");
     });
@@ -174,7 +174,7 @@ describe("CreditsResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/credits/cust_1/pools/pool_1/grants"
+        "http://localhost:8080/api/v1/client/credits/cust_1/pools/pool_1/grants"
       );
       expect(options.method).toBe("GET");
     });

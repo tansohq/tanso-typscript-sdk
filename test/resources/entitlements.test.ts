@@ -42,7 +42,7 @@ describe("EntitlementsResource", () => {
       expect(result).toEqual(data);
       const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/entitlements/cust_1"
+        "http://localhost:8080/api/v1/client/entitlements/cust_1"
       );
     });
 
@@ -82,7 +82,7 @@ describe("EntitlementsResource", () => {
       expect(result.allowed).toBe(true);
       const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/entitlements/cust_1/api_access"
+        "http://localhost:8080/api/v1/client/entitlements/cust_1/api_access"
       );
     });
 
@@ -136,7 +136,7 @@ describe("EntitlementsResource", () => {
       expect(result).toEqual(evaluation);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/entitlements"
+        "http://localhost:8080/api/v1/client/entitlements"
       );
       expect(options.method).toBe("POST");
       expect(JSON.parse(options.body as string)).toEqual({

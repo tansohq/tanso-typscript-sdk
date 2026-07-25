@@ -59,7 +59,7 @@ describe("SubscriptionsResource", () => {
       expect(result.invoice.id).toBe("inv_1");
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/subscriptions"
+        "http://localhost:8080/api/v1/client/subscriptions"
       );
       expect(options.method).toBe("POST");
       expect(JSON.parse(options.body as string)).toEqual({
@@ -106,7 +106,7 @@ describe("SubscriptionsResource", () => {
       expect(result).toBeUndefined();
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/subscriptions/cancellation/sub_1/scheduled"
+        "http://localhost:8080/api/v1/client/subscriptions/cancellation/sub_1/scheduled"
       );
       expect(options.method).toBe("DELETE");
     });
@@ -126,7 +126,7 @@ describe("SubscriptionsResource", () => {
       expect(result).toBeUndefined();
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/subscriptions/sub_1/plan-change"
+        "http://localhost:8080/api/v1/client/subscriptions/sub_1/plan-change"
       );
       expect(options.method).toBe("POST");
       expect(JSON.parse(options.body as string)).toEqual({
@@ -146,7 +146,7 @@ describe("SubscriptionsResource", () => {
 
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/subscriptions/sub_1/plan-change/scheduled"
+        "http://localhost:8080/api/v1/client/subscriptions/sub_1/plan-change/scheduled"
       );
       expect(options.method).toBe("DELETE");
     });

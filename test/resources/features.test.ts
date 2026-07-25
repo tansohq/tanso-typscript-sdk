@@ -45,7 +45,7 @@ describe("FeaturesResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/features"
+        "http://localhost:8080/api/v1/client/features"
       );
       expect(options.method).toBe("GET");
     });
@@ -85,7 +85,7 @@ describe("FeaturesResource", () => {
       expect(result).toEqual(feature);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/features/api_access"
+        "http://localhost:8080/api/v1/client/features/api_access"
       );
       expect(options.method).toBe("GET");
     });

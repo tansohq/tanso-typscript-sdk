@@ -46,16 +46,11 @@ await client.events.ingest({
 });
 ```
 
-## Environment Detection
+## Base URL
 
-The SDK automatically detects the environment from your API key prefix:
-
-| Key Prefix  | Base URL                              |
-|-------------|---------------------------------------|
-| `sk_test_`  | `https://sandbox.api.tansoflow.com`   |
-| `sk_live_`  | `https://api.tansoflow.com`           |
-
-You can override this with the `baseUrl` option:
+Tanso is open source and self-hosted, so the SDK talks to your own instance.
+The default is `http://localhost:8080` (the quickstart compose stack); point
+`baseUrl` at your deployment:
 
 ```typescript
 const client = new TansoClient("sk_test_key", {

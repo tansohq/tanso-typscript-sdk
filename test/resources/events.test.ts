@@ -41,7 +41,7 @@ describe("EventsResource", () => {
       expect(result).toEqual(response);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/events"
+        "http://localhost:8080/api/v1/client/events"
       );
       expect(options.method).toBe("POST");
       const body = JSON.parse(options.body as string);

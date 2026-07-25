@@ -12,7 +12,7 @@ describe("TansoClient", () => {
     expect(() => new TansoClient("")).toThrow("API key is required");
   });
 
-  it("should use sandbox URL for sk_test_ keys", () => {
+  it("should default to the self-hosted URL", () => {
     const mockFetch = setupFetchMock();
     const client = new TansoClient("sk_test_key");
 
@@ -25,10 +25,10 @@ describe("TansoClient", () => {
     client.plans.list();
 
     const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
-    expect(url).toContain("sandbox.api.tansoflow.com");
+    expect(url).toContain("localhost:8080");
   });
 
-  it("should use live URL for sk_live_ keys", () => {
+  it("should default to the self-hosted URL for sk_live_ keys too", () => {
     const mockFetch = setupFetchMock();
     const client = new TansoClient("sk_live_key");
 
@@ -41,7 +41,7 @@ describe("TansoClient", () => {
     client.plans.list();
 
     const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
-    expect(url).toContain("api.tansoflow.com");
+    expect(url).toContain("localhost:8080");
     expect(url).not.toContain("sandbox");
   });
 

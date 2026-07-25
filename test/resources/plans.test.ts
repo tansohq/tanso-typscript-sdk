@@ -39,7 +39,7 @@ describe("PlansResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/plans"
+        "http://localhost:8080/api/v1/client/plans"
       );
       expect(options.method).toBe("GET");
     });

@@ -47,7 +47,7 @@ describe("BillingResource", () => {
       expect(result).toEqual(data);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/billing/invoices/cust_1"
+        "http://localhost:8080/api/v1/client/billing/invoices/cust_1"
       );
       expect(options.method).toBe("GET");
     });
@@ -80,7 +80,7 @@ describe("BillingResource", () => {
       expect(result).toBeUndefined();
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/billing/invoices/inv_1/mark-paid"
+        "http://localhost:8080/api/v1/client/billing/invoices/inv_1/mark-paid"
       );
       expect(options.method).toBe("POST");
     });
@@ -108,7 +108,7 @@ describe("BillingResource", () => {
       expect(result).toEqual(session);
       const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit];
       expect(url).toBe(
-        "https://sandbox.api.tansoflow.com/api/v1/client/billing/subscriptions/sub_1/stripe/checkout"
+        "http://localhost:8080/api/v1/client/billing/subscriptions/sub_1/stripe/checkout"
       );
       expect(options.method).toBe("POST");
     });
