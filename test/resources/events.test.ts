@@ -51,6 +51,30 @@ describe("EventsResource", () => {
       expect(body.occurredAt).toBeDefined();
     });
 
+    it("should return the weighted credit deduction fields", async () => {
+      const response = {
+        usageLimitExceeded: false,
+        creditsDeducted: 2,
+        weightApplied: 2,
+        weightId: "wgt_1",
+        weightMatch: "FEATURE_DEFAULT",
+        remainingBalance: 3,
+      };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(response))
+      );
+
+      const result = await client.events.ingest({
+        customerReferenceId: "cust_1",
+        eventName: "chat completion",
+        usageUnits: 1,
+        eventIdempotencyKey: "idem_2",
+        costInput: { model: "gpt-4.1" },
+      });
+
+      expect(result).toEqual(response);
+    });
+
     it("should include idempotency key header when provided", async () => {
       const response = { usageLimitExceeded: false };
       mockFetch.mockResolvedValueOnce(
