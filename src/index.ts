@@ -49,7 +49,9 @@ export type {
   EntitlementEvaluationUsage,
   EntitlementEvaluationSimulation,
   EntitlementEvaluationCredit,
+  EntitlementEvaluationCreditQuote,
   EntitlementEvaluationMeta,
+  WeightMatch,
 } from "./types/entitlements.js";
 
 // Types - Events

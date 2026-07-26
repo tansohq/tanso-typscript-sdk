@@ -37,13 +37,24 @@ const subscription = await client.subscriptions.create({
 const entitlement = await client.entitlements.check("user_123", "api_access");
 console.log(entitlement.allowed); // true
 
+// Quote the credit cost before doing billable work (weight table)
+const decision = await client.entitlements.evaluate({
+  customerReferenceId: "user_123",
+  featureKey: "ai.chat",
+  usage: { usageUnits: 1, model: "gpt-4.1" },
+});
+console.log(decision.creditQuote?.estimatedCredits); // e.g. 8
+// A quote, not a promise — the charge resolves at the event's occurredAt.
+
 // Ingest a usage event
-await client.events.ingest({
+const receipt = await client.events.ingest({
   customerReferenceId: "user_123",
   eventName: "api_call",
   eventIdempotencyKey: "evt_unique_123",
   usageUnits: 1,
+  costInput: { model: "gpt-4.1" }, // must match the model sent on evaluate
 });
+console.log(receipt.creditsDeducted, receipt.remainingBalance);
 ```
 
 ## Base URL

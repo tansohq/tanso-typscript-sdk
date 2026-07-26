@@ -146,6 +146,34 @@ describe("EntitlementsResource", () => {
         context: { idempotencyKey: "idem_1" },
       });
     });
+
+    it("should pass usage.model and return the creditQuote", async () => {
+      const evaluation = {
+        referenceCustomerId: "cust_1",
+        allowed: true,
+        featureKey: "ai.chat",
+        flowId: "flw_789",
+        creditQuote: {
+          weight: 8,
+          estimatedCredits: 8,
+          weightId: "wgt_1",
+          weightMatch: "MODEL",
+        },
+      };
+      mockFetch.mockResolvedValueOnce(
+        mockResponse(200, successEnvelope(evaluation))
+      );
+
+      const result = await client.entitlements.evaluate({
+        customerReferenceId: "cust_1",
+        featureKey: "ai.chat",
+        usage: { usageUnits: 1, model: "gpt-4.1" },
+      });
+
+      expect(result.creditQuote).toEqual(evaluation.creditQuote);
+      const [, options] = mockFetch.mock.calls[0] as [string, RequestInit];
+      expect(JSON.parse(options.body as string).usage.model).toBe("gpt-4.1");
+    });
   });
 
   describe("error handling", () => {
